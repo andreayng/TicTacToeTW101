@@ -80,22 +80,8 @@ public class Board {
     }
 
     public String getWinningMove(int playerNumber) {
-        String playerMark = "";
-        if(playerNumber == 1) {
-            playerMark = "X";
-        }
-        else if(playerNumber == 2) {
-            playerMark = "O";
-        }
-        int[] playerMarkBoard = new int[9];
-        for(int i = 0; i < 9; i++) {
-            if(board[i].equals(playerMark)) {
-                playerMarkBoard[i] = 1;
-            }
-            else {
-                playerMarkBoard[i] = 0;
-            }
-        }
+        String playerMark = convertPlayerNumberToPlayerMark(playerNumber);
+        int[] playerMarkBoard = returnPlayerMarkBoard(playerMark);
 
         for (int i = 0; i <= 2; i++) {
             if (playerMarkBoard[i] + playerMarkBoard[i+3] + playerMarkBoard[i+6] == 2) {
@@ -113,8 +99,31 @@ public class Board {
         if (playerMarkBoard[2] + playerMarkBoard[4] + playerMarkBoard[6] == 2) {
             return findWinningSpace(2, 4, 6);
         }
-        return "";
 
+        return "";
+    }
+
+    private String convertPlayerNumberToPlayerMark(int playerNumber) {
+        if(playerNumber == 1) {
+            return "X";
+        }
+        else if(playerNumber == 2) {
+            return "O";
+        }
+        return "";
+    }
+
+    private int[] returnPlayerMarkBoard(String playerMark) {
+        int[] playerMarkBoard = new int[9];
+        for(int i = 0; i < 9; i++) {
+            if(board[i].equals(playerMark)) {
+                playerMarkBoard[i] = 1;
+            }
+            else {
+                playerMarkBoard[i] = 0;
+            }
+        }
+        return playerMarkBoard;
     }
 
     private String findWinningSpace(int i, int i1, int i2) {

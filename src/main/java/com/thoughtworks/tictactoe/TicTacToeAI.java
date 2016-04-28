@@ -11,6 +11,10 @@ public class TicTacToeAI implements InputCollector {
     }
 
     public String getPlayerMove() {
+        String nextMove = board.getWinningMove(2);
+        if(!nextMove.equals("")) {
+            return nextMove;
+        }
         return board.getFirstAvailableSpace();
     }
 }
